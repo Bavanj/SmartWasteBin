@@ -1,0 +1,70 @@
+ // Smart Waste Bin Monitoring System - Java Version
+// Demonstrating Object-Oriented Programming Concepts
+
+class WasteBin {
+    protected int binID;
+    protected String location;
+    protected int level; // 0 to 100 (percentage)
+
+    // Constructor
+    public WasteBin(int id, String loc, int lvl) {
+        this.binID = id;
+        this.location = loc;
+        this.level = lvl;
+    }
+
+    // Setter method (Encapsulation)
+    public void setLevel(int lvl) {
+        if (lvl >= 0 && lvl <= 100)
+            this.level = lvl;
+    }
+
+    // Getter method
+    public int getLevel() {
+        return this.level;
+    }
+
+    // Display current bin status
+    public void displayStatus() {
+        System.out.println("Bin ID: " + binID + " | Location: " + location);
+        if (level < 40)
+            System.out.println("Status: Empty");
+        else if (level < 80)
+            System.out.println("Status: Half-Full");
+        else
+            System.out.println("Status: Full");
+    }
+}
+
+// SmartBin class extending WasteBin (Inheritance)
+class SmartBin extends WasteBin {
+
+    public SmartBin(int id, String loc, int lvl) {
+        super(id, loc, lvl);
+    }
+
+    // Method to check for alerts
+    public void checkAlert() {
+        if (level >= 80)
+            System.out.println("⚠️ ALERT: Bin " + binID + " at " + location + " is full!");
+    }
+}
+
+// Main Class
+public class SmartWasteBin {
+    public static void main(String[] args) {
+        System.out.println("Smart Waste Bin Monitoring System");
+        System.out.println("----------------------------------");
+
+        SmartBin bin1 = new SmartBin(101, "Main Street", 30);
+        SmartBin bin2 = new SmartBin(102, "Central Park", 85);
+
+        bin1.displayStatus();
+        bin1.checkAlert();
+
+        System.out.println();
+
+        bin2.displayStatus();
+        bin2.checkAlert();
+    }
+}
